@@ -2,6 +2,9 @@
 
 通过自定义的 `typeHandler` 实现数据加密入库，查询结果解密返回。
 
+本项目改于 [mybatis-encrypt](https://github.com/9526xu/mybatis-encrypt/pull/2) ，mybatis改为了mybatis-plus，
+同时增加了批量操作和框架自带方法的加解密操作。
+
 ## 使用方式
 
 1.引入 `encrypt-interface` 依赖
@@ -116,8 +119,52 @@ insert 语句：
     @Select("select * from bank_card where id=#{id}")
     BankCardDO queryById(int id);
 ```
+mybatis和mybatis plus自带的方法解
+
+```autoResultMap = true``` 和 ```typeHandler = CryptTypeHandler.class```
+```java
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName(value = "BANK_CARD", autoResultMap = true)
+@KeySequence(value="SEQ_AAZ179",clazz = Long.class)
+public class BankCard implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "ID", type = IdType.INPUT)
+    private Long id;
+
+    @TableField("gmt_create")
+    private Date gmtCreate;
+
+    @TableField("gmt_update")
+    private Date gmtUpdate;
+
+    @TableField(value = "card_no", typeHandler = CryptTypeHandler.class)
+    private String cardNo;
+
+    @TableField(value = "phone", typeHandler = CryptTypeHandler.class)
+    private String phone;
+
+    @TableField(value = "name", typeHandler = CryptTypeHandler.class)
+    private String name;
+
+    @TableField(value = "id_no", typeHandler = CryptTypeHandler.class)
+    private String idNo;
+}
+```
+注意：autoResultMap = true 最小版本 3.1.2
+
 ## 相关测试
 
 本工程提供一个测试 demo，使用了内嵌的 H2 数据库，无需使用其他数据库。
 
 测试例子比较简单，只要运行 `MybatisDemoApplicationTests` 即可。
+
+## 参考链接
+【1】[Java 代码解决敏感信息加解密](https://mp.weixin.qq.com/s/3AkqXoGN4QB8CtDEv9gCEw)
+
+【2】[Java 代码解决敏感信息加解密](https://juejin.cn/post/7138330262303637541?searchId=2023122818053636D8F9AF3DBF5C7C9EE1)
+
+【3】[在Mybatis-Plus中指定TypeHandler后不生效的问题与解决办法](https://blog.csdn.net/weixin_50276625/article/details/115858779)
