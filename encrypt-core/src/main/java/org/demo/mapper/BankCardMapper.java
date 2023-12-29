@@ -5,12 +5,15 @@ import org.apache.ibatis.annotations.*;
 import org.demo.pojo.BankCardDO;
 import org.demo.type.CryptTypeHandler;
 
+import java.util.List;
+
 /**
  * @author andyXu xu9529@gmail.com
  * @date 2020/3/30
+ * https://blog.csdn.net/heartsdance/article/details/119734906
  */
 @Mapper
-public interface BankCardMapper {
+public interface BankCardMapper{
 
     @Results(id = "bankCard", value = {
             // 通过指定 typeHandler 进行解密
@@ -22,6 +25,10 @@ public interface BankCardMapper {
     })
     @Select("select * from bank_card where id=#{id}")
     BankCardDO queryById(int id);
+
+    @ResultMap(value="bankCard")
+    @Select("select * from bank_card where card_no=#{card_no,javaType=crypt}")
+    List<BankCardDO> queryByCardNo(String card_no);
 
     // 获取自增 id
     @Options(useGeneratedKeys = true, keyProperty = "id")
