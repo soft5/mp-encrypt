@@ -27,7 +27,7 @@ public class BankCard implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "ID", type = IdType.INPUT)
-    private Long id;
+    private Integer id;
 
     @TableField("gmt_create")
     private Date gmtCreate;

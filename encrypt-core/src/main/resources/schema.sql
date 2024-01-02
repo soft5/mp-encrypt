@@ -11,3 +11,16 @@ id_no varchar(256) NOT NULL DEFAULT '' COMMENT '证件号'
 );
 
 CREATE TABLE FOO (ID INT IDENTITY, BAR VARCHAR(64));
+
+
+DROP TABLE IF EXISTS AA01;
+
+CREATE TABLE AA01 (
+                           AAA000 int primary key auto_increment,
+                           AAA001 int NOT NULL COMMENT 'bank_card.id',
+                           AAA002 varchar(256) NOT NULL DEFAULT '' COMMENT '字段2',
+                           AAA003 varchar(256) NOT NULL DEFAULT '' COMMENT '字段3',
+                           AAA004 varchar(256) NOT NULL DEFAULT '' COMMENT '字段4',
+                           AAA005 varchar(256) NOT NULL DEFAULT '' COMMENT '字段5',
+                           AAA006 varchar(256) NOT NULL DEFAULT '' COMMENT '字段6'
+);

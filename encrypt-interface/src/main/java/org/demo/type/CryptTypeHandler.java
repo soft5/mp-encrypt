@@ -56,7 +56,7 @@ public class CryptTypeHandler extends BaseTypeHandler<String> {
             String result = new String(bytes, Charset.defaultCharset());
             return result;
         } catch (Exception e) {
-            log.error("加密失败", e);
+            log.error("解密失败", e);
             return param;
         }
     }

@@ -11,6 +11,15 @@
         <result property="phone" column="phone" typeHandler="org.demo.type.CryptTypeHandler"/>
     </resultMap>
 
+    <resultMap id="unitXml" type="org.demo.pojo.UnitTableDO">
+        <result property="card_no" column="card_no" typeHandler="org.demo.type.CryptTypeHandler"/>
+        <result property="name" column="name" typeHandler="org.demo.type.CryptTypeHandler"/>
+        <result property="id_no" column="id_no" typeHandler="org.demo.type.CryptTypeHandler"/>
+        <result property="phone" column="phone" typeHandler="org.demo.type.CryptTypeHandler"/>
+        <result property="aaa002" column="AAA002" typeHandler="org.demo.type.CryptTypeHandler"/>
+        <result property="aaa005" column="AAA005" typeHandler="org.demo.type.CryptTypeHandler"/>
+    </resultMap>
+
     <insert id="insertBankCard" keyProperty="id" useGeneratedKeys="true" parameterType="org.demo.pojo.BankCardDO">
         INSERT INTO bank_card (card_no, phone,name,id_no)
         VALUES
@@ -31,5 +40,9 @@
     <!-- resultMap 同上   -->
     <select id="queryByPhone" resultMap="bankCardXml">
           select * from bank_card where phone in(#{phone,javaType=crypt})
+    </select>
+
+    <select id="queryUnitTable" resultMap="unitXml">
+          select a.*, b.AAA002, b.AAA003, b.AAA004, b.AAA005, b.AAA006 from bank_card a, aa01 b where a.id = b.AAA001 AND a.phone in(#{phone,javaType=crypt})
     </select>
 </mapper>

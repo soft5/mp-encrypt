@@ -1,5 +1,6 @@
 package org.demo.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,10 +16,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder()
 @Data
-public class BankCardDO {
+public class UnitTableDO {
 
-
-    private Integer id;
+    private int id;
 
     private Date gmt_create;
 
@@ -31,4 +31,16 @@ public class BankCardDO {
     private String name;
 
     private String id_no;
+
+    private Long aaa001;
+
+    private String aaa002;
+
+    private String aaa003;
+
+    private String aaa004;
+
+    private String aaa005;
+
+    private String aaa006;
 }

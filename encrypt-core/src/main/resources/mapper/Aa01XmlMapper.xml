@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.mapper.Aa01Mapper">
+
+    <insert id="insertAa01" parameterType="org.demo.entity.Aa01">
+        INSERT INTO aa01 (aaa000, aaa001, aaa002, aaa003, aaa004, aaa005, aaa006)
+        VALUES (#{aaa000},
+                #{aaa001},
+                #{aaa002,javaType=crypt},
+                #{aaa003,typeHandler=org.demo.type.CryptTypeHandler},
+                #{aaa004},
+                #{aaa005,javaType=crypt},
+                #{aaa006})
+    </insert>
+
+</mapper>
